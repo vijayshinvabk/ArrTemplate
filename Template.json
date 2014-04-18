@@ -264,8 +264,8 @@
         {
           "Credential": "vmadmin",
           "GetScript": "return @{ Installed = Test-Path -LiteralPath \"$env:ProgramFiles\\IIS\\Application Request Routing\\requestRouter.dll\" -PathType Leaf }",
-          "SetScript": "$webpicmdexe = \"$env:ProgramFiles\\Microsoft\\Web Platform Installer\\WebPICmd.exe\"$webpicmdargs = @(\"/Install\", \"/Products:ARR\", \"/AcceptEula\", \"/SuppressReboot\", \"/Log:$env:BrewmasterDir\\Logs\\ARR-Install.log\")Write-Verbose \"Installing ARR ($webpicmdexe $webpicmdargs)\" -VerboseStart-Process -FilePath $webpicmdexe -ArgumentList $webpicmdargs -Wait",
-          "TestScript": "if (Test-Path -LiteralPath \"$env:ProgramFiles\\IIS\\Application Request Routing\\requestRouter.dll\" -PathType Leaf){Write-Verbose \"$env:ProgramFiles\\IIS\\Application Request Routing\\requestRouter.dll already exists.\" -Verbosereturn $true}return $false",
+          "SetScript": "$webpicmdexe = \"$env:ProgramFiles\\Microsoft\\Web Platform Installer\\WebPICmd.exe\"\r\n$webpicmdargs = @(\"/Install\", \"/Products:ARR\", \"/AcceptEula\", \"/SuppressReboot\", \"/Log:$env:BrewmasterDir\\Logs\\ARR-Install.log\")\r\nWrite-Verbose \"Installing ARR ($webpicmdexe $webpicmdargs)\" -Verbose\r\nStart-Process -FilePath $webpicmdexe -ArgumentList $webpicmdargs -Wait",
+          "TestScript": "if (Test-Path -LiteralPath \"$env:ProgramFiles\\IIS\\Application Request Routing\\requestRouter.dll\" -PathType Leaf)\r\n{Write-Verbose \"$env:ProgramFiles\\IIS\\Application Request Routing\\requestRouter.dll already exists.\" -Verbose\r\nreturn $true}\r\nreturn $false",
           "Type": "Script",
           "ImportModule": null,
           "ImportTypeName": null,
