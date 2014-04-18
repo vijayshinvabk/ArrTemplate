@@ -281,7 +281,7 @@
         {
           "Credential": "vmadmin",
           "GetScript": null,
-          "SetScript": "$appcmdexe = \"$env:SystemRoot\\system32\\inetsrv\\appcmd\"$appcmdargs = 'set config -section:system.webServer/proxy /enabled:\"True\" /commit:apphost'Write-Verbose \"Enabling ARR ($appcmdexe $appcmdargs)\" -VerboseStart-Process -FilePath $appcmdexe -ArgumentList $appcmdargs -Wait",
+          "SetScript": "$appcmdexe = \"$env:SystemRoot\\system32\\inetsrv\\appcmd\"\r\n$appcmdargs = 'set config -section:system.webServer/proxy /enabled:\"True\" /commit:apphost'\r\nWrite-Verbose \"Enabling ARR ($appcmdexe $appcmdargs)\" -Verbose\r\nStart-Process -FilePath $appcmdexe -ArgumentList $appcmdargs -Wait",
           "TestScript": null,
           "Type": "Script",
           "ImportModule": null,
