@@ -280,9 +280,9 @@
         },
         {
           "Credential": "vmadmin",
-          "GetScript": "$output = [string](.\\appcmd.exe list modules \"ApplicationRequestRouting\")\r\nreturn ![string]::IsNullOrEmpty($output)",
+          "GetScript": "return @{ Enabled = (Get-WebConfigurationProperty -Filter //proxy -Name enabled).Value}",
           "SetScript": "$appcmdexe = \"$env:SystemRoot\\system32\\inetsrv\\appcmd\"\r\n$appcmdargs = 'set config -section:system.webServer/proxy /enabled:\"True\" /commit:apphost'\r\nWrite-Verbose \"Enabling ARR ($appcmdexe $appcmdargs)\" -Verbose\r\nStart-Process -FilePath $appcmdexe -ArgumentList $appcmdargs -Wait",
-          "TestScript": "$output = [string](.\\appcmd.exe list modules \"ApplicationRequestRouting\")\r\nif ([string]::IsNullOrEmpty($output))\r\n{return $false}\r\nelse\r\n{Write-Verbose \"ApplicationRequestRouting Module already exists.\" -Verbose\r\nreturn $true}",
+          "TestScript": "if ((Get-WebConfigurationProperty -Filter //proxy -Name enabled).Value)\r\n{Write-Verbose \"ApplicationRequestRouting proxy already enabled\" -Verbose\r\nreturn $true}\r\nreturn $false",
           "Type": "Script",
           "ImportModule": null,
           "ImportTypeName": null,
