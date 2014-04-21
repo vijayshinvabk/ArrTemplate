@@ -1,5 +1,5 @@
 {
-  "Name": "Brewmaster.ArrReverseProxy",
+  "Name": "Aditi.ArrReverseProxy",
   "Description": "ArrReverseProxy",
   "Parameters": [
     {
@@ -102,8 +102,9 @@
       "Deployment": {
         "Name": "{{CloudDeploymentId}}",
         "VirtualMachines": [
+{% for i in (2..NumberOfWebServers) -%}
           {
-            "Name": "{{ServerNamePrefix}}",
+            "Name": "{{ServerNamePrefix}}{{i}}",
             "RoleSize": "{{VmSize}}",
             "AvailabilitySet": "arr-avset",
             "OsVirtualDisk": {
@@ -120,6 +121,7 @@
               "ArrServer"
             ]
           }
+{% endfor -%}
         ],
         "DiskStorageAccount": "{{DiskStore}}",
         "RemoveUnreferencedVms": false
